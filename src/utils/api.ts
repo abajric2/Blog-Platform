@@ -15,7 +15,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
   }
 };
 
-export const getPost = async (slug: string) => {
+export const getPost = async (slug: string): Promise<Post> => {
   try {
     const res = await fetch(`${process.env.BASE_URL}/api/posts/${slug}`, {
       cache: "no-store",
@@ -26,6 +26,32 @@ export const getPost = async (slug: string) => {
     return res.json();
   } catch (error) {
     console.error("Error fetching post:", error);
+    throw error;
+  }
+};
+
+export const createPost = async (
+  title: string,
+  content: string,
+  image?: string
+) => {
+  try {
+    const response = await fetch(`/api/posts/new`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, content, image }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to create post.");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error creating post:", error);
     throw error;
   }
 };

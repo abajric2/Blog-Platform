@@ -1,18 +1,15 @@
 import { getPost } from "@/utils/api";
-import React from "react";
 
 interface PostProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
-const Post: React.FC<PostProps> = async ({ params }) => {
+const Post = async ({ params }: PostProps) => {
   const { slug } = await params;
 
-  const post = await getPost(slug as string);
+  const post = await getPost(slug);
 
-  console.log(post);
+  console.log(post, params);
 
   return <div>Post</div>;
 };
