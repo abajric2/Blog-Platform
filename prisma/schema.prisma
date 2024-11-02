@@ -69,7 +69,7 @@ model Post {
   id String @id @default(cuid()) @map("_id")
   slug String @unique
   title String
-  description String
+  content String
   image String?
   createdAt DateTime @default(now())
   userEmail String
