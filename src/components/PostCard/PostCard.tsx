@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { Post } from "@/types/post";
 import UserIcon from "./user.svg";
+import ArrowRightIcon from "./arrow-right.svg";
+import Link from "next/link";
 
 interface PostCardProps {
   post: Post;
@@ -9,7 +11,7 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
-    <div className="bg-[#fcfcfc] shadow-gray-300 shadow-md overflow-hidden p-4">
+    <div className="bg-[#fcfcfc] shadow-gray-300 shadow-md overflow-hidden p-4 transform transition-transform hover:scale-105 duration-300">
       <div className="relative w-full h-48 mb-4">
         <Image
           src={
@@ -29,6 +31,19 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       </div>
       <div className="text-gray-400 text-xs mt-2">
         {new Date(post.createdAt).toLocaleDateString()}
+      </div>
+      <div className="flex justify-end mt-4">
+        <Link
+          href={`/posts/${post.slug}`}
+          className="flex items-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200"
+        >
+          <span>View Details</span>
+          <Image
+            src={ArrowRightIcon}
+            alt="Arrow right"
+            className="ml-2 w-4 h-4"
+          />
+        </Link>
       </div>
     </div>
   );
