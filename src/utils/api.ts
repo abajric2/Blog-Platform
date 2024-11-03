@@ -1,4 +1,4 @@
-import { Post } from "@/app/posts/types/post";
+import { Post } from "@/types/post";
 
 export const fetchPosts = async (): Promise<Post[]> => {
   try {
@@ -32,6 +32,7 @@ export const getPost = async (slug: string): Promise<Post> => {
 
 export const createPost = async (
   title: string,
+  description: string,
   content: string,
   image?: string
 ) => {
@@ -41,7 +42,7 @@ export const createPost = async (
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, content, image }),
+      body: JSON.stringify({ title, description, content, image }),
     });
 
     if (!response.ok) {

@@ -1,7 +1,7 @@
 import prisma from "@/utils/connect";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOptions";
 
 const generateSlug = (title: string) => {
   return title
@@ -25,12 +25,11 @@ const createUniqueSlug = async (slug: string) => {
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  console.log("Sesijaaaaaaaaaaaaaaa", session);
   if (!session || !session.user || !session.user.email) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { title, content, image } = await req.json();
+  const { title, description, content, image } = await req.json();
 
   if (!title || !content) {
     return NextResponse.json(
@@ -45,6 +44,7 @@ export async function POST(req: Request) {
   const newPost = await prisma.post.create({
     data: {
       title,
+      description,
       content,
       image,
       slug: uniqueSlug,

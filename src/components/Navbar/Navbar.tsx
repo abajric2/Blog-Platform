@@ -8,7 +8,7 @@ const Navbar = () => {
 
   if (status === "loading") {
     return (
-      <nav className="shadow-lg relative z-10">
+      <nav className="fixed top-0 left-0 w-full shadow-lg z-10 bg-white">
         <div className="px-20 py-4 flex justify-between items-center">
           <Link href="/posts" className="text-blue-700 text-2xl font-black">
             BlogPlatform
@@ -19,7 +19,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="shadow-lg relative z-10">
+    <nav className="fixed top-0 left-0 w-full shadow-lg z-10 bg-white">
       <div className="px-20 py-4 flex justify-between items-center">
         <Link href="/posts" className="text-blue-700 text-2xl font-black">
           BlogPlatform
