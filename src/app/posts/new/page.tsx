@@ -20,12 +20,30 @@ const CreatePost = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  function isValidUrl(str: string) {
+    const pattern = new RegExp(
+      "^(https?:\\/\\/)?" +
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
+        "((\\d{1,3}\\.){3}\\d{1,3}))" +
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
+        "(\\?[;&a-z\\d%_.~+=-]*)?" +
+        "(\\#[-a-z\\d_]*)?$",
+      "i"
+    );
+    return !!pattern.test(str);
+  }
+
   const handleCreatePost = async () => {
     try {
       const { title, description, content, image } = formData;
 
       if (!title || !content) {
         toast.error("Please fill in all required fields.");
+        return;
+      }
+
+      if (image && !isValidUrl(image)) {
+        toast.error("Please enter valid image URL or leave the field blank!");
         return;
       }
 
