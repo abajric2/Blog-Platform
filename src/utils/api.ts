@@ -5,9 +5,12 @@ export const fetchPosts = async (
   limit = 10
 ): Promise<{ posts: Post[]; totalPages: number }> => {
   try {
-    const res = await fetch(`/api/posts?page=${page}&limit=${limit}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.BASE_URL}/api/posts?page=${page}&limit=${limit}`,
+      {
+        cache: "no-store",
+      }
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch posts");
     }
