@@ -15,14 +15,21 @@ export const fetchPosts = async (): Promise<Post[]> => {
   }
 };
 
-export const getPost = async (slug: string): Promise<Post> => {
+export const getPost = async (slug: string): Promise<Post | null> => {
   try {
     const res = await fetch(`${process.env.BASE_URL}/api/posts/${slug}`, {
       cache: "no-store",
     });
-    if (!res.ok) {
-      throw new Error("Failed to fetch post");
+
+    if (res.status === 404) {
+      return null;
     }
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Failed to fetch post.");
+    }
+
     return res.json();
   } catch (error) {
     console.error("Error fetching post:", error);

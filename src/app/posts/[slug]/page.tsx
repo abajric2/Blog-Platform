@@ -1,6 +1,7 @@
 import { getPost } from "@/utils/api";
 import Image from "next/image";
 import { Post as PostType } from "@/types/post";
+import { notFound } from "next/navigation";
 
 interface PostProps {
   params: Promise<{ slug: string }>;
@@ -11,9 +12,7 @@ const PostDetails = async ({ params }: PostProps) => {
   const post: PostType | null = await getPost(slug);
 
   if (!post) {
-    return (
-      <div className="text-center text-gray-500 py-10">Post not found.</div>
-    );
+    notFound();
   }
 
   return (

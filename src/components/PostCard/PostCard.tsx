@@ -10,14 +10,14 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+  const defaultImage =
+    "https://images.pexels.com/photos/28216688/pexels-photo-28216688/free-photo-of-autumn-camping.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+
   return (
     <div className="bg-[#fcfcfc] shadow-gray-300 shadow-md overflow-hidden p-4 transform transition-transform hover:scale-105 duration-300">
       <div className="relative w-full h-48 mb-4">
         <Image
-          src={
-            post.image ||
-            "https://images.pexels.com/photos/28216688/pexels-photo-28216688/free-photo-of-autumn-camping.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          }
+          src={post.image || defaultImage}
           alt={post.title}
           layout="fill"
           objectFit="cover"
