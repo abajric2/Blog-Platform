@@ -2,6 +2,8 @@
 
 import { createPost } from "@/utils/api";
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
@@ -21,100 +23,85 @@ const CreatePost = () => {
   const handleCreatePost = async () => {
     try {
       const { title, description, content, image } = formData;
+
+      if (!title || !content) {
+        toast.error("Please fill in all required fields.");
+        return;
+      }
+
       const newPost = await createPost(title, description, content, image);
       console.log("Post created successfully:", newPost);
+      toast.success("Post created successfully!");
+      setFormData({
+        title: "",
+        description: "",
+        content: "",
+        image: "",
+      });
     } catch (error) {
       console.error("Error creating post:", error);
+      toast.error("Failed to create post. Please try again.");
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-white mt-10">
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <div className="bg-white py-12 px-16 shadow-xl w-full max-w-2xl">
         <h2 className="text-2xl font-bold mb-12 text-center text-blue-700">
           Create a New Post
         </h2>
-
-        <div className="relative mb-4">
+        <div className="relative z-0 mb-10">
           <input
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
-            required
-            className={`peer h-10 mb-5 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 bg-transparent ${
-              formData.title ? "py-6" : ""
-            }`}
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
           />
-          <label
-            className={`absolute left-0 top-2 text-gray-500 text-sm transition-all pointer-events-none peer-focus:text-blue-500 ${
-              formData.title && "-top-5"
-            }`}
-          >
+          <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
             Title (Required)
           </label>
         </div>
-
-        <div className="relative mb-4">
+        <div className="relative z-0 mb-10">
           <input
             type="text"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className={`peer h-10 w-full mb-5 border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 bg-transparent ${
-              formData.description ? "py-6" : ""
-            }`}
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
           />
-          <label
-            className={`absolute left-0 top-2 text-gray-500 text-sm transition-all pointer-events-none peer-focus:text-blue-500 ${
-              formData.description && "-top-5"
-            }`}
-          >
+          <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
             Description (Optional)
           </label>
         </div>
-
-        <div className="relative mb-6">
+        <div className="relative z-0 mb-10">
           <input
-            type="url"
+            type="text"
             name="image"
             value={formData.image}
             onChange={handleChange}
-            className={`peer h-10 w-full border-b-2 mb-5 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 bg-transparent ${
-              formData.image ? "py-6" : ""
-            }`}
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
           />
-          <label
-            className={`absolute left-0 top-2 text-gray-500 text-sm transition-all pointer-events-none peer-focus:text-blue-500 ${
-              formData.image && "-top-5"
-            }`}
-          >
+          <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
             Image URL (Optional)
           </label>
         </div>
-        <div className="relative mb-4">
+        <div className="relative z-0 mb-10">
           <textarea
             name="content"
             value={formData.content}
             onChange={handleChange}
-            required
-            className={`peer h-32 w-full border-b-2 mb-5 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500 bg-transparent ${
-              formData.content ? "py-6" : ""
-            }`}
+            className="block h-32 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
           />
-          <label
-            className={`absolute left-0 top-2 text-gray-500 text-sm transition-all pointer-events-none peer-focus:text-blue-500 ${
-              formData.content && "-top-5"
-            }`}
-          >
+          <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
             Content (Required)
           </label>
         </div>
-
         <button
           onClick={handleCreatePost}
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
