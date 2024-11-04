@@ -5,7 +5,7 @@ import PaginationControls from "@/components/PaginationControls/PaginationContro
 import { Post } from "@/types/post";
 
 interface PostsPageProps {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }
 
 const PostsPage = async ({ searchParams }: PostsPageProps) => {
