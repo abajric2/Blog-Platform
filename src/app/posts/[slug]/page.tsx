@@ -16,9 +16,9 @@ const PostDetails = async ({ params }: PostProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen w-full py-32 px-10">
+    <div className="flex flex-col items-center min-h-screen w-full py-32 sm:px-10">
       <div className="flex flex-col md:flex-row w-3/4">
-        <div className="w-full md:w-1/2 h-auto relative">
+        <div className="w-full md:w-1/2 sm:h-72 md:h-64 h-48 relative">
           <Image
             src={
               post.image ||
@@ -27,21 +27,20 @@ const PostDetails = async ({ params }: PostProps) => {
             alt={post.title}
             layout="fill"
             objectFit="cover"
-            className="max-h-72 min-h-56"
           />
         </div>
-        <div className="flex flex-col p-6 w-full md:w-1/2">
-          <h1 className="text-3xl font-bold text-blue-700 mb-2">
+        <div className="flex flex-col py-10 px-0 md:p-6 w-full md:w-1/2">
+          <h1 className="text-4xl font-bold text-blue-700 mb-2">
             {post.title}
           </h1>
           <p className="text-gray-600 mb-4">{post.description}</p>
-          <div className="text-gray-500 text-sm mb-4">
+          <div className="text-gray-500 text-base mb-4">
             <span>Posted by {post.userEmail}</span> •{" "}
             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
           </div>
         </div>
       </div>
-      <div className="w-3/4 mt-28 text-gray-700 prose prose-lg">
+      <div className="w-3/4 md:mt-10 mt-5 text-gray-700 prose prose-lg text-lg">
         {post.content}
       </div>
     </div>

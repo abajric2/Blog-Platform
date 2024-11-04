@@ -97,7 +97,7 @@ const CreatePost = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white mt-10">
+    <div className="flex justify-center items-center h-screen bg-white 2xl:mt-10 lg:mt-20 mt-28">
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       <div className="bg-white py-12 px-16 shadow-xl w-full max-w-2xl">
         <h2 className="text-2xl font-bold mb-12 text-center text-blue-700">
