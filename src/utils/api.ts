@@ -1,8 +1,11 @@
 import { Post } from "@/types/post";
 
-export const fetchPosts = async (): Promise<Post[]> => {
+export const fetchPosts = async (
+  page = 1,
+  limit = 10
+): Promise<{ posts: Post[]; totalPages: number }> => {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/api/posts`, {
+    const res = await fetch(`/api/posts?page=${page}&limit=${limit}`, {
       cache: "no-store",
     });
     if (!res.ok) {
