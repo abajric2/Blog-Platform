@@ -4,7 +4,7 @@
 
 After downloading or cloning the repository, make sure you are in the root directory of the application and open a terminal in that folder. To install the necessary dependencies, run the following command:
 
-### `npm install`
+### `npm install --legacy-peer-deps`
 
 Once the dependencies are installed, you can start the application by running:
 
