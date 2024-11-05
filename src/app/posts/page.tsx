@@ -12,7 +12,7 @@ const PostsPage = async ({ searchParams }: PostsPageProps) => {
   const params = await searchParams;
 
   const page = parseInt(params.page || "1", 10);
-  const limit = 10;
+  const limit = 8;
 
   const { posts, totalPages } = await fetchPosts(page, limit);
 

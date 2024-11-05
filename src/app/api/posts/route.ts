@@ -5,7 +5,7 @@ export const GET = async (req: Request) => {
   try {
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "10");
+    const limit = parseInt(searchParams.get("limit") || "8");
     const skip = (page - 1) * limit;
 
     const posts = await prisma.post.findMany({
@@ -14,7 +14,7 @@ export const GET = async (req: Request) => {
     });
 
     const totalPosts = await prisma.post.count();
-    const totalPages = Math.ceil(totalPosts / limit);
+    const totalPages = Math.ceil(totalPosts / limit) || 1;
 
     return NextResponse.json({ posts, totalPages }, { status: 200 });
   } catch (err) {

@@ -8,7 +8,7 @@ const generateSlug = (title: string) => {
     .toLowerCase()
     .replace(/\s+/g, "-")
     .replace(/[^\w-]+/g, "")
-    .slice(0, 50);
+    .slice(0, 100);
 };
 
 const createUniqueSlug = async (slug: string) => {

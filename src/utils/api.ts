@@ -2,7 +2,7 @@ import { Post } from "@/types/post";
 
 export const fetchPosts = async (
   page = 1,
-  limit = 10
+  limit = 8
 ): Promise<{ posts: Post[]; totalPages: number }> => {
   try {
     const res = await fetch(

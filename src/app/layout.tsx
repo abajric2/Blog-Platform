@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 import AuthProvider from "@/providers/AuthProvider";
 import Navbar from "@/components/Navbar/Navbar";
-import { Inter } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Blog Platform",
   description: "Blog Platform",
 };
 
-const fontSans = Inter({
+const fontSans = Nunito_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
