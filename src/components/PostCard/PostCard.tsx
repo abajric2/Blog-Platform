@@ -19,8 +19,10 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <Image
           src={post.image || defaultImage}
           alt={post.title}
-          layout="fill"
-          objectFit="cover"
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, 50vw"
+          priority
         />
       </div>
       <h2 className="text-blue-700 text-lg font-bold mb-2">{post.title}</h2>

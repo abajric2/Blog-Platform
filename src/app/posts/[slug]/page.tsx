@@ -25,8 +25,10 @@ const PostDetails = async ({ params }: PostProps) => {
               "https://images.pexels.com/photos/28216688/pexels-photo-28216688/free-photo-of-autumn-camping.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             }
             alt={post.title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="flex flex-col py-10 px-0 md:p-6 w-full md:w-1/2">
